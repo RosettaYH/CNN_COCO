@@ -61,7 +61,7 @@ def prepare_data(filepath, src, dest):
 # Train dataset 
 print("Creating train data...")
 # Change path  
-prepare_data('.food-101/meta/train.txt', '.food-101/images', 'train')
+prepare_data('./food-101/meta/train.txt', './food-101/images', 'train')
 
 
 # In[5]:
@@ -70,7 +70,7 @@ prepare_data('.food-101/meta/train.txt', '.food-101/images', 'train')
 # Test dataset
 print("Creating test data...")
 # Change path  
-prepare_data('.food-101/meta/test.txt', '.food-101/images', 'test')
+prepare_data('./food-101/meta/test.txt', './food-101/images', 'test')
 
 
 # In[7]:
@@ -113,7 +113,7 @@ print("done")
 
 import random
 
-data_dir = ".food-101/images"
+data_dir = "./food-101/images"
 foods_sorted = sorted(os.listdir(data_dir))
 
 def pick_n_random_classes(n):
