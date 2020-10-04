@@ -61,7 +61,7 @@ def prepare_data(filepath, src, dest):
 # Train dataset 
 print("Creating train data...")
 # Change path  
-prepare_data('./meta/train.txt', './images', 'train')
+prepare_data('.food-101/meta/train.txt', '.food-101/images', 'train')
 
 
 # In[5]:
@@ -70,7 +70,7 @@ prepare_data('./meta/train.txt', './images', 'train')
 # Test dataset
 print("Creating test data...")
 # Change path  
-prepare_data('./meta/test.txt', './images', 'test')
+prepare_data('.food-101/meta/test.txt', '.food-101/images', 'test')
 
 
 # In[7]:
@@ -113,7 +113,7 @@ print("done")
 
 import random
 
-data_dir = "./images"
+data_dir = ".food-101/images"
 foods_sorted = sorted(os.listdir(data_dir))
 
 def pick_n_random_classes(n):
@@ -134,12 +134,12 @@ train_datagen = ImageDataGenerator(
     zoom_range=0.2,
     horizontal_flip=True)
 train_generator = train_datagen.flow_from_directory(
-        "/Users/dixonhu/Desktop/food-101/train",        # Change path
+        "./train",        # Change path
         target_size=(224,224),
         batch_size=64)
 test_datagen = ImageDataGenerator(rescale=1/255) 
 test_generator = test_datagen.flow_from_directory(
-        "/Users/dixonhu/Desktop/food-101/test",        # Change path
+        "./test",        # Change path
         target_size=(224,224),
         batch_size=64)
 
