@@ -4,12 +4,6 @@
 # In[1]:
 
 
-get_ipython().system('pip install tensorflow')
-get_ipython().system('pip install Keras')
-get_ipython().system('pip install opencv-python')
-get_ipython().system('pip install mlxtend')
-
-
 # In[2]:
 
 
