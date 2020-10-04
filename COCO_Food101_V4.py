@@ -13,7 +13,6 @@ import tensorflow as tf
 from tensorflow import keras
 import matplotlib.pyplot as plt
 import scipy
-import seaborn as sns
 from mlxtend.preprocessing import minmax_scaling
 from sklearn.metrics import roc_curve, auc
 
