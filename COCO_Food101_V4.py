@@ -161,18 +161,18 @@ x = Dropout(0.2)(x)
 predictions = Dense(101,kernel_regularizer=regularizers.l2(0.005), activation='softmax')(x)
 
 model = Model(inputs=inception.input, outputs=predictions)
-model.compile(optimizer=SGD(lr=0.0001, momentum=0.9), loss='categorical_crossentropy', metrics=['accuracy'])
-checkpointer = ModelCheckpoint(filepath='best_model_classV4.hdf5', verbose=1, save_best_only=True)
-csv_logger = CSVLogger('history_classV4.log')
+model.compile(optimizer=SGD(lr=0.0001, momentum=0.9), loss='categorical_crossentropy', metrics=['accuracy', 'top_k_categorical_accuracy'])
+checkpointer = ModelCheckpoint(filepath='best_model_class50.hdf5', verbose=1, save_best_only=True)
+csv_logger = CSVLogger('history_class50.log')
 
 history = model.fit_generator(train_generator,
                     steps_per_epoch = 75750/64,
                     validation_data=test_generator,
                     validation_steps= 25250/64,
-                    epochs=15,
+                    epochs=50,
                     verbose=1,
                     callbacks=[csv_logger, checkpointer])
 
 # Save the model for future 
-model.save('model_trained_classV4.hdf5')
+model.save('model_trained_class50.hdf5')
 
