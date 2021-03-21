@@ -1,12 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
-# In[2]:
-
-
 import pandas as pd
 import numpy as np
 import tensorflow as tf
@@ -31,12 +22,7 @@ from shutil import copy
 from shutil import copytree, rmtree
 from collections import defaultdict
 import collections
-
 import os
-
-
-# In[3]:
-
 
 def prepare_data(filepath, src, dest):
   classes_images = defaultdict(list)
@@ -54,26 +40,15 @@ def prepare_data(filepath, src, dest):
       copy(os.path.join(src,food,i), os.path.join(dest,food,i))
   print("Copying Done!")
 
-
-# In[4]:
-
-
 # Train dataset 
 print("Creating train data...")
 # Change path  
 prepare_data('./food-101/meta/train.txt', './food-101/images', 'train')
 
-
-# In[5]:
-
-
 # Test dataset
 print("Creating test data...")
 # Change path  
 prepare_data('./food-101/meta/test.txt', './food-101/images', 'test')
-
-
-# In[7]:
 
 
 from PIL import Image 
@@ -89,26 +64,14 @@ def detect(data_dir):
             print('Not using this file, might be not an image:' + path)
             os.remove(path)
 
-
-# In[8]:
-
-
 name_dir = './train' 
 for folder in os.listdir(name_dir):
     detect(os.path.join(name_dir,folder))
 print("done")
-
-
-# In[9]:
-
-
 name_dir = './test' 
 for folder in os.listdir(name_dir):
     detect(os.path.join(name_dir,folder))
 print("done")
-
-
-# In[15]:
 
 
 import random
@@ -124,10 +87,6 @@ def pick_n_random_classes(n):
   food_list10.sort()
   return food_list10
 
-
-# In[10]:
-
-
 train_datagen = ImageDataGenerator(
     rescale=1. / 255,
     shear_range=0.2,
@@ -142,9 +101,6 @@ test_generator = test_datagen.flow_from_directory(
         "./test",        # Change path
         target_size=(224,224),
         batch_size=64)
-
-
-# In[11]:
 
 
 from tensorflow.keras.applications.inception_v3 import InceptionV3
