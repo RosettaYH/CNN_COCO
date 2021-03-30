@@ -2,13 +2,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.image as img
 from keras.preprocessing.image import load_img, img_to_array
-from tensorflow.keras.preprocessing import image
-from tensorflow.keras.models import load_model
+from keras.preprocessing import image
+from keras.models import load_model
 
-model_best = load_model('./best_model_class50.hdf5', compile = False)
+model_best = load_model('CNN_Food101_model.hdf5', compile = False)
 
 food_list = []
-with open('./classes.txt', 'r') as txt:
+with open('classes.txt', 'r') as txt:
   paths = [read.strip() for read in txt.readlines()]
   for p in paths:
     food_list.append(p)
@@ -39,5 +39,3 @@ images.append('test2.jpg')
 images.append('test3.jpg')
 
 predict_class(model_best, images, True)
-
-
