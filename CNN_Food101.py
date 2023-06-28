@@ -1,3 +1,6 @@
+"""
+Image Classification of Food-101 Dataset using Transfer Learning
+"""
 import pandas as pd
 import numpy as np
 import tensorflow as tf
@@ -19,6 +22,7 @@ from PIL import Image
 import random
 import os
 
+# Load data
 def prepare_data(filepath, src, dest):
     classes_images = defaultdict(list)
     with open(filepath, 'r') as txt:
@@ -34,17 +38,6 @@ def prepare_data(filepath, src, dest):
             copy(os.path.join(src,food,i), os.path.join(dest,food,i))
     print("Copying Done!")
 
-
-# Train dataset 
-print("Creating train data...")
-# Change path  
-prepare_data('food-101/meta/train.txt', 'food-101/images', 'train')
-
-# Test dataset
-print("Creating test data...")
-# Change path  
-prepare_data('food-101/meta/test.txt', 'food-101/images', 'test')
-
 def detect(data_dir):
     num = 0 
     for img_file in os.listdir(data_dir):
@@ -55,6 +48,15 @@ def detect(data_dir):
         except:
             print('Not using this file, might be not an image:' + path)
             os.remove(path)
+
+# Train dataset
+print("Creating train data...")
+prepare_data('food-101/meta/train.txt', 'food-101/images', 'train')
+
+# Test dataset
+print("Creating test data...")
+prepare_data('food-101/meta/test.txt', 'food-101/images', 'test')
+
 
 name_dir = 'train'
 for folder in os.listdir(name_dir):
@@ -83,7 +85,7 @@ test_generator = test_datagen.flow_from_directory(
         target_size=(224,224),
         batch_size=64)
 
-
+# Model
 inception = InceptionV3(weights='imagenet', include_top=False)
 x = inception.output
 x = GlobalAveragePooling2D()(x)
@@ -105,5 +107,5 @@ history = model.fit_generator(train_generator,
                     verbose=1,
                     callbacks=[csv_logger, checkpointer])
 
-# Save the model for future 
+# Save Model
 model.save('CNN_Food101_model.hdf5')
